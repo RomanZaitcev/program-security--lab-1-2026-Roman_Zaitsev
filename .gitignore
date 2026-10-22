@@ -1,0 +1,16 @@
+# .NET build output
+bin/
+obj/
+*.user
+.vs/
+# Secrets and local config
+.env
+appsettings.Development.json
+*.pfx
+# Local databases
+*.db
+*.sqlite
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
