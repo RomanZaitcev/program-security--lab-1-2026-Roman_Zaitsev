@@ -20,3 +20,6 @@ Format: `[PREFIX] Short description`
 - Documentation is updated before or together with code changes.
 - All user input is validated.
 - A change is finished when it works, is tested and is documented.
+
+## Security
+Security rules for development are defined in [07-security-policy.md](07-security-policy.md). Personal data rules are in [08-privacy-policy.md](08-privacy-policy.md).
