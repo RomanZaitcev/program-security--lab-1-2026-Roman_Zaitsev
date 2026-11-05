@@ -14,7 +14,6 @@ Service Manager is a web application that automates daily work of small service 
 
 ## 3. Scope
 
-### In scope
 - Authorization with two roles: **Manager** and **Technician**.
 - Repair order registration and status tracking.
 - Client database with repair history.
@@ -22,33 +21,23 @@ Service Manager is a web application that automates daily work of small service 
 - Generation of printable documents: Acceptance Receipt and Certificate of Completion.
 - Dashboard with basic statistics.
 
-### Out of scope
-- Online payments and accounting.
-- Customer self-service portal.
-- Native mobile applications (the web interface is responsive instead).
-- Integration with external suppliers.
-
 ## 4. Stakeholders
 
-| Stakeholder | Interest |
-|---|---|
-| Workshop owner | Lower losses, control over operations, no subscription fees |
-| Manager | Fast order intake, client lookup, printed documents |
-| Technician | Clear task queue, easy status and parts logging |
-| Developer | Maintainable code, clear requirements |
-| Project supervisor | Compliance with course requirements |
+- Workshop owner: Lower losses, control over operations, no subscription fees.
+- Manager: Fast order intake, client lookup, printed documents.
+- Technician: Clear task queue, easy status and parts logging.
+- Developer: Maintainable code, clear requirements.
 
 ## 5. Constraints
 
 - Platform: .NET, C#, MVC pattern.
 - Database: SQL Server or SQLite.
-- Client: any modern web browser on any OS.
+- Client: any web browser on any OS.
 - Source code stored on GitHub.
 
 ## 6. Schedule
 
-| Phase | Description | Dates |
-|---|---|---|
-| 1 | Operational logic, database schema, interface mockups | 22.09.26 - 08.10.26 |
-| 2 | Application development | 09.10.26 - 15.11.26 |
-| 3 | Testing, refinement, documentation | 16.11.26 - 30.11.26 |
+Phase
+1. Operational logic, database schema, interface mockups (22.09.26 - 08.10.26)
+2. Application development (09.10.26 - 15.11.26)
+3. Testing, refinement, documentation (16.11.26 - 30.11.26)

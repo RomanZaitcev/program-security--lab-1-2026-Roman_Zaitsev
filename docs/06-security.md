@@ -1,44 +1,36 @@
 # 06. Security
 
-Based on the practices of NIST SP 800-218 (SSDF): prepare the organization, protect the software, produce well-secured software, respond to vulnerabilities.
-
-## 1. Assets
+## What we protect
 - Client personal data (name, phone).
-- User accounts and credentials.
+- User accounts and passwords.
 - Order and inventory data.
-- Source code and keys.
+- Source code and SSH keys.
 
-## 2. Threats and measures
+## Security requirements
+- Passwords are stored only as salted hashes, never as plain text.
+- Access rights are checked on the server for every action, so a Technician cannot see Manager data or other technicians' orders.
+- The database is accessed only through parameterized queries it is protection from SQL injection.
+- All forms use anti-forgery tokens, and user output is encoded.
+- The application works over HTTPS.
+- Status changes and stock deductions are logged with the user and time.
+- Error messages do not reveal internal details.
+- Secrets and private keys are kept out of the repository.
 
-| Threat | Measure |
-|---|---|
-| Unauthorized access | Authentication, role-based access control, session timeout |
-| Weak or stolen passwords | Passwords stored only as salted hashes (e.g. ASP.NET Core Identity), password complexity rules |
-| Privilege escalation (Technician reads Manager data) | Server-side role checks on every action, not only hidden UI elements |
-| SQL injection | Parameterized queries / ORM only |
-| Cross-site scripting (XSS) | Output encoding in views, input validation |
-| CSRF | Anti-forgery tokens on all forms |
-| Data interception | HTTPS for all traffic |
-| Leakage of secrets | Secrets kept outside the repository (`.env`, user secrets), `.gitignore` rules |
-| Stock manipulation | Transactional stock deduction, audit of changes |
+## Secure development
+- Changes are reviewed before merging into `main`.
+- Dependencies are checked for known vulnerabilities before release.
+- Found vulnerabilities are recorded, fixed in a separate branch and verified by a test.
 
-## 3. Security requirements
+## Security requirements from the threat model
 
-| ID | Requirement |
-|---|---|
-| SEC-1 | All passwords shall be stored as salted hashes. |
-| SEC-2 | Every protected action shall check the user's role on the server. |
-| SEC-3 | All database access shall use parameterized queries. |
-| SEC-4 | All forms shall use anti-forgery tokens. |
-| SEC-5 | The application shall be served over HTTPS. |
-| SEC-6 | Status changes and stock deductions shall be logged with user and time. |
-| SEC-7 | Error messages shall not reveal internal details to the user. |
-
-## 4. Secure development practices
-- Review of changes before merging into `main`.
-- Dependency vulnerability check before release.
-- Static analysis / compiler warnings treated as errors where possible.
-- Private SSH keys stay on the developer's machine only.
-
-## 5. Vulnerability handling
-Found issues are recorded, prioritized by impact, fixed in a `fix/` branch, and verified by a test.
+Requirement
+SEC 8. The number of failed login attempts shall be limited (temporary lockout or delay) to prevent password guessing and request flooding.
+SEC 9. Every request that uses an order ID shall check on the server that the order is assigned to the current Technician, or that the user is a Manager.
+SEC 10. Stock deduction and cost calculation shall run in a database transaction; the part price and quantity limits shall be taken from the database on the server, not from the request.
+SEC 11. Secrets (database password, keys, certificates) shall be stored outside the repository, in user-secrets or environment variables. `appsettings.json` shall not contain secrets.
+SEC 12. Logs shall not contain passwords, session tokens, connection strings or full client phone numbers.
+SEC 13. Session cookies shall be marked HttpOnly, Secure and SameSite, and sessions shall expire after a period of inactivity.
+SEC 14. All user-supplied data (comments, device description, client name) shall be encoded on output, including printable documents.
+SEC 15. Order status transitions shall be validated on the server according to the defined sequence (BR-5).
+SEC 16. The database shall not be publicly accessible; the application shall use an account with the minimum necessary permissions.
+SEC 17. Regular database backups shall be made and stored separately from the server.
